@@ -18,6 +18,9 @@ router.get(
     let filterField = request.query.filter
     let filterSubstring = request.query.value
 
+    console.log('from users request.session :', request.session)
+    console.log('from users request.sessionID :', request.sessionID)
+
     const result = validationResult(request)
 
     if (!result.isEmpty())
