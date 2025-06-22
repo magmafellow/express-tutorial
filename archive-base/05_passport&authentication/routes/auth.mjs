@@ -16,22 +16,13 @@ router.get('/status', (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
-  if (!req.user) return res.sendStatus(401) // not Authenticated
+  if (!req.user) return res.sendStatus(401)  // not Authenticated
 
-  req.logout(err => {
-    if (err) return res.sendStatus(400)
+  req.logout((err) => {
+    if (err) return res.sendStatus(400);
     return res.sendStatus(200)
   })
-})
 
-router.get('/discord', passport.authenticate('discord'))
-router.get(
-  '/discord/redirect',
-  passport.authenticate('discord'),
-  (req, res) => {
-    console.log('req.user: ', req.user)
-    res.sendStatus(200)
-  }
-)
+})
 
 export default router
