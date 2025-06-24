@@ -10,6 +10,7 @@ import {
 import { User } from '../mongoose/schemas/user.mjs'
 import { hashPassword } from '../utils/helpers.mjs'
 import { deleteUserByUsername, getAllUsers, updateUserByUsername } from '../actions/users.mjs'
+import { returnFoundUser } from '../handlers/users.mjs'
 
 const router = Router()
 
@@ -42,13 +43,7 @@ router.get(
   }
 )
 
-router.get('/:username', resolveUserByUsername, async (request, response) => {
-  const { foundUser } = request
-
-  if (!foundUser) return response.sendStatus(404)
-
-  return response.send({ data: foundUser, msg: 'OK' })
-})
+router.get('/:username', resolveUserByUsername, returnFoundUser)
 
 router.post(
   '/',
